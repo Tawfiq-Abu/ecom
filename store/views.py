@@ -1,3 +1,4 @@
+from functools import cache
 from django.shortcuts import render,get_object_or_404
 from django.http import Http404
 from .models import Category,Product
@@ -34,6 +35,12 @@ class StoreDetail(DetailView):
     template_name = 'store/detail.html'
     context_object_name = 'product'
 
+class Categories(ListView):
+    model = Category
+    template_name = 'store/categories.html'
+
+    
+
 
 
     '''
@@ -47,3 +54,27 @@ class StoreDetail(DetailView):
         if obj.in_stock != True:
             raise Http404()
         return obj
+
+class CategoriesList(ListView):
+    model = Product
+    context_object_name = 'products'
+    template_name = 'store/category_view.html'
+
+    
+
+    def get_queryset(self):
+        # this gets slug from the urls.py
+        category_slug_from_url = self.kwargs.get('slug')
+
+        category = get_object_or_404(Category, slug=category_slug_from_url)
+       
+
+        queryset = Product.objects.filter(Category=category)
+        
+        return queryset 
+
+
+    
+        
+    
+

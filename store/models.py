@@ -13,13 +13,17 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("store:category_list", kwargs={"slug": self.slug})
+    
         
     class Meta:
         # this when categories are more than one would set the db model name to be categories instead of category
         verbose_name_plural = 'categories'
 
 class Product(models.Model):
-    Category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
+    Category = models.ForeignKey(Category, related_name='category', on_delete=models.CASCADE)
     uploaded_by = models.ForeignKey(User, related_name = 'uploader', on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
     description = models.TextField(blank = True)
@@ -38,8 +42,10 @@ class Product(models.Model):
     def __str__(self):
             return self.name
 
-
+    # dynamic urls
     def get_absolute_url(self):
+        # you can use args=[self.slug] 
+        # kwargs is a dictionary whiles args is a list
             return reverse('store:product_detail',kwargs={'slug':self.slug})
 
         
