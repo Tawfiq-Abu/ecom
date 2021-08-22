@@ -18,17 +18,9 @@ class Homepage(ListView):
     template_name = 'store/home.html'
 
     def get_queryset(self):
-        return Product.objects.all
+        return Product.products.all
 
-def categories(request):
-    '''
-    function that returns all objects in the category table 
-    in the settings.py we would add "store.views.categories" to the TEMPLATE list under context_processors
-    indicating that for every page that we view we have access to the category view
-    '''
-    return {
-        'categories' : Category.objects.all()
-    }
+
 
 class StoreDetail(DetailView):
     model = Product
