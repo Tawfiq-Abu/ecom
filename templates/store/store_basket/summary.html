@@ -36,11 +36,11 @@
                   <option value="">3</option>
                   <option value="">4</option>
                 </select>
-                <button type="button" id="update-button" data-index="{{product.id}}" value="{{ product.id }}"
+                <button type="button" id="update-button" data-index="{{product.id}}" 
                   class="btn btn-outline-secondary btn-sm update-button">
                   Update
                 </button>
-                <button type="button" id="delete-button" data-index="{{product.id}}" value="{{ product.id }}"
+                <button type="button" id="delete-button" data-index="{{product.id}}" 
                   class="btn btn-outline-secondary btn-sm delete-button">
                   Delete
                 </button>
@@ -72,6 +72,8 @@
             },
             success: function(json){
               $('.product-item[data-index="' + prodid + '"]').remove();
+              document.getElementById('subtotal').innerHTML = json.total
+              document.getElementById('basket-qty').innerHTML = json.qty
             },
             error:function(xhr,errmsg,err){
 
@@ -80,7 +82,11 @@
     })
 
 
-    $(document).on('click','#update-button', function(e){
+    
+    
+</script>
+<script>
+  $(document).on('click','#update-button', function(e){
         e.preventDefault();
         var prodid = $(this).data('index')
         $.ajax({
@@ -88,17 +94,22 @@
             url : '{% url "store_basket:basket_update" %}',
             data:{
                 productid: $(this).data('index'),
-                productqty: $('#select' + prodid +'option:selected').text()
+                productqty: $('#select' + prodid +' option:selected').text().trim(),
                 csrfmiddlewaretoken: '{{csrf_token}}',
                 action: 'post'
             },
             success: function(json){
+              document.getElementById('basket-qty').innerHTML = json.qty
+              document.getElementById('subtotal').innerHTML = json.total
             },
             error:function(xhr,errmsg,err){
 
             }
+        
         });
     })
+
+    console.log(data.productqty);
 </script>
 
 
