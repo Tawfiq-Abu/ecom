@@ -19,6 +19,12 @@ def basket_summary(request):
     basket = Basket(request)
     return render(request,'store/store_basket/summary.html',{'basket':basket})
 
+def clear_basket(request):
+    basket = Basket(request)
+    basket.clear(request)
+    return redirect("store_basket:basket")
+
+
 def basket_add(request):
     basket = Basket(request)
     receipt = Receipt()
@@ -92,19 +98,3 @@ def generate_qr_code(request):
     qr_offset.close()
     qr_code.save()
     return redirect("store_basket:view_qr_code", pk=qr_code.pk)
-
-    # f = open("myfile.txt", "w")
-    
-    # f.write(self.product_name + ' \n' + str(self.item_qty) + ' \n' + 'total price:' + ' ' + str(self.total_price))
-    # f.close()
-    # with open('myfile.txt') as f:
-    #     data = f.read()
-    # # qr_image = qrcode.make(self.product_name + ' ' + str(self.item_qty) + ' ' + 'total price:' + ' ' + str(self.total_price))
-    # qr_image = qrcode.make(data)
-    # qr_offset = Image.new('RGB',(500,500),'white')
-    # qr_offset.paste(qr_image)
-    # files_name = f'(self.product_name)-(self.id)qr.png'
-    # stream = BytesIO()
-    # qr_offset.save(stream,'PNG')
-    # self.code.save(files_name,File(stream),save = False)
-    # qr_offset.close()    

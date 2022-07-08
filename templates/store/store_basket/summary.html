@@ -57,12 +57,20 @@
     </div>
     <div class="col-12 text-end">
       <div class="h6 fw-bold">
-        <button type="button" id="print-receipt-button"  class="btn btn-outline-secondary btn-sm delete-button">
-          <a href="{% url 'store_basket:generate_qr_code' %}">
+        <button type="button" id="print-receipt-button"  class="btn btn-primary btn-sm">
+          <a href="{% url 'store_basket:generate_qr_code' %}" class="text-decoration-none text-reset">
             Generate QR code
           </a>
         </button>
       </div>
+      <div class="col-12 text-end">
+        <div class="h6 fw-bold">
+          <button type="button" id="print-receipt-button"  class="btn btn-outline-danger btn-sm">
+            <a href="{% url 'store_basket:clear_basket' %}" class="text-decoration-none text-reset">
+              Clear Basket
+            </a>
+          </button>
+        </div>
     </div>
   </div>
 </main>

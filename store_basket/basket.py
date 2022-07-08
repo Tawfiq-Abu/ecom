@@ -14,6 +14,10 @@ class Basket():
             basket = self.session['skey'] = {}
         self.basket = basket
 
+    def clear(self, request):
+        self.session = request.session
+        self.basket = self.session['skey'] = {}
+
     def add(self,product,product_qty=1):
         '''
         adding and updating the users basket session data
