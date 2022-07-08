@@ -1,0 +1,3 @@
+dell 
+2 
+total price: 5120.44

@@ -44,7 +44,7 @@ class Basket():
 
     def __len__(self):
         '''
-        get the basket data and count the quantity of items in it
+        get the basket data and count the quantity of items in it.
         '''
         return sum(item['qty'] for item in self.basket.values())
 
