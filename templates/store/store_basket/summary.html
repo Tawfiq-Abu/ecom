@@ -55,6 +55,15 @@
     <div class="col-12 text-end">
       <div class="h6 fw-bold">Sub Total: £<div id="subtotal" class="d-inline-flex">{{basket.get_total_price}}</div></div>
     </div>
+    <div class="col-12 text-end">
+      <div class="h6 fw-bold">
+        <button type="button" id="print-receipt-button"  class="btn btn-outline-secondary btn-sm delete-button">
+          <a href="{% url 'store_basket:generate_qr_code' %}">
+            Generate QR code
+          </a>
+        </button>
+      </div>
+    </div>
   </div>
 </main>
 
@@ -80,9 +89,6 @@
             }
         });
     })
-
-
-    
     
 </script>
 <script>
@@ -110,6 +116,28 @@
     })
 
     console.log(data.productqty);
+</script>
+<script>
+  // $(document).on('click', '#print-print-receipt-button', function(e) {
+  //   e.preventDefault();
+  //   // gather order info from basket and send to backend to generate qr code
+  //   // then display the qr code here
+  //   $.ajax({
+  //           type: 'POST',
+  //           url : '{% url "store_basket:generate_qr_code" %}',
+  //           data:{
+  //               receiptId: "2098rfamew0914jr2",
+  //               csrfmiddlewaretoken: '{{csrf_token}}',
+  //               action: 'post',
+  //               basket: // all products in basket
+  //           },
+  //           success: function(json){
+  //             // display qr code
+  //           },
+  //           error:function(xhr,errmsg,err){
+  //             // handle error
+  //           }
+  // })
 </script>
 
 

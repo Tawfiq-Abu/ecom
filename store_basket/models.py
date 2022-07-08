@@ -3,7 +3,7 @@ from isort import stream
 import qrcode
 from io import BytesIO
 from django.core.files import File
-from PIL import Image,ImageDraw
+from PIL import Image, ImageDraw
 
 # Create your models here.
 class Receipt(models.Model):
@@ -34,3 +34,6 @@ class Receipt(models.Model):
         self.code.save(files_name,File(stream),save = False)
         qr_offset.close()
         super().save(*args,**kwargs)
+
+class QrCode(models.Model):
+    file = models.ImageField(upload_to='qrcodes/')
